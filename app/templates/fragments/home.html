@@ -1,0 +1,92 @@
+{% extends 'base.html' %} {% block custom_root %}
+<nav class="navbar bg-body-tertiary fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Foodify</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasNavbar"
+      aria-controls="offcanvasNavbar"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="offcanvas offcanvas-end"
+      tabindex="-1"
+      id="offcanvasNavbar"
+      aria-labelledby="offcanvasNavbarLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Navigation</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/offers">Offers</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              More
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Burgers</a></li>
+              <li><a class="dropdown-item" href="#">Drinks</a></li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li><a class="dropdown-item" href="#">Contact Us</a></li>
+              <li><a class="dropdown-item" href="#">Legal Information</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <section class="my-3">
+          <a class="btn btn-outline-primary" href="/login">Log in</a>
+          <a class="btn btn-primary" href="/signup">Sign up</a>
+        </section>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="app__main home__main">
+
+<section class="home__hero-section">
+
+  <figure>
+    <img src="https://images.pexels.com/photos/1307698/pexels-photo-1307698.jpeg"
+        alt=""
+    >
+  </figure>
+  <div class="card border-warning m-3">
+    <div class="card-header">What makes us unique</div>
+    <div class="card-body">
+      <h5 class="card-title">Foodify loves your food</h5>
+      <p class="card-text">We are dedicated to bringing you the best there is outhere on your plate for you to have a good time</p>
+    </div>
+    <div class="card-body">
+      <a href="/offers" class="btn btn-warning">See our offers</a>
+    </div>
+  </div>
+
+</section>
+
+</main>
+{% endblock custom_root %}

@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% block custom_root %}
+<nav class="navbar bg-body-tertiary fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Foodify</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasNavbar"
+      aria-controls="offcanvasNavbar"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="offcanvas offcanvas-end"
+      tabindex="-1"
+      id="offcanvasNavbar"
+      aria-labelledby="offcanvasNavbarLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Navigation</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/offers">Offers</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              More
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Burgers</a></li>
+              <li><a class="dropdown-item" href="#">Drinks</a></li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li><a class="dropdown-item" href="#">Contact Us</a></li>
+              <li><a class="dropdown-item" href="#">Legal Information</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <section class="my-3">
+          <a class="btn btn-outline-primary" href="/login">Log in</a>
+        </section>
+      </div>
+    </div>
+  </div>
+</nav>
+
+        <main class="app__main signup__main">
+            <h1>Signup Page</h1>
+         
+            <form
+                method="POST"
+                action="/user/create"
+                enctype="multipart/form-data"
+            >
+                <section>
+                    <article class="mb-3">
+                        <label class="form-label" for="firstname">Firstname</label>
+                        <input 
+                            id="firstname" 
+                            placeholder="john"
+                            name="firstname"
+                            class="form-control" 
+                        >
+                    </article>
+                    <article class="mb-3">
+                        <label class="form-label" for="lastname">Lastname</label>
+                        <input 
+                            id="lastname" 
+                            placeholder="john"
+                            name="lastname"
+                            class="form-control" 
+                        >
+                    </article>
+                    <article class="mb-3">
+                        <label class="form-label" for="email">Email</label>
+                        <input 
+                            id="email" 
+                            placeholder="bob@gmail.com"
+                            name="email"
+                            class="form-control" 
+                        >
+                    </article>
+                    <article class="mb-3">
+                        <label class="form-label" for="password">Password</label>
+                        <input 
+                            id="password" 
+                            placeholder="***********"
+                            name="password"
+                            class="form-control" 
+                        >
+                    </article>
+                    <article>
+                        <label class="form-label" for="photo"></p>
+                        <input class="form-control" type="file" name="photo">
+                    </article>
+                </section>
+                <section class="my-3">
+                    <button class="btn btn-outline-danger" type="reset">Reset</button>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </section>
+            </form>
+        
+        </main>
+{% endblock custom_root %}

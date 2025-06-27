@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <!-- html has two children head and body -->
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="{{ url_for('static', filename="css/styles.css") }}">
+    </head>
+    <body style="margin:0">
+        <main class="app__main dashboard__main">
+            <h1>Dashboard Page</h1>
+            
+            <p>Hi {{ user.get_fullname() }}</p>
+
+            <figure>
+                <img src="/static/{{user.photo_url}}" alt="Image of {{user.get_fullname()}}" />
+            </figure>   
+
+            <a href="/logout">Log out</a>
+        </main>
+    </body>
+</html>
