@@ -1,21 +1,132 @@
-<!DOCTYPE html>
-<html>
-    <!-- html has two children head and body -->
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="{{ url_for('static', filename="css/styles.css") }}">
-    </head>
-    <body style="margin:0">
-        <main class="app__main dashboard__main">
-            <h1>Dashboard Page</h1>
-            
-            <p>Hi {{ user.get_fullname() }}</p>
+{% extends 'base.html'%} {% block custom_root %}
+<nav class="navbar bg-body-tertiary fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/home">Foodify</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasNavbar"
+      aria-controls="offcanvasNavbar"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="offcanvas offcanvas-end"
+      tabindex="-1"
+      id="offcanvasNavbar"
+      aria-labelledby="offcanvasNavbarLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Navigation</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/offers">Offers</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              More
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Burgers</a></li>
+              <li><a class="dropdown-item" href="#">Drinks</a></li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li><a class="dropdown-item" href="#">Contact Us</a></li>
+              <li><a class="dropdown-item" href="#">Legal Information</a></li>
+            </ul>
+          </li>
+        </ul>
 
-            <figure>
-                <img src="/static/{{user.photo_url}}" alt="Image of {{user.get_fullname()}}" />
-            </figure>   
+        <section class="my-3">
+          <a class="btn btn-outline-danger" href="/logout">Log out</a>
+        </section>
+      </div>
+    </div>
+  </div>
+</nav>
 
-            <a href="/logout">Log out</a>
-        </main>
-    </body>
-</html>
+
+
+<main class="app__main dashboard__main">
+
+  <section class="d-flex flex-row justify-content-between align-items-center">
+     <p>Hi {{ user.get_fullname() }}</p>
+    <button type="button" class="btn btn-warning btn-sm dashboard__message-button" id="dashboard-live-toast-trigger">
+      <i class="fa-solid fa-envelope-open-text mx-2"></i>You have a message
+    </button>
+  </section>
+  <section class="d-flex flex-column align-items-center"> 
+   
+
+    
+    <section>
+        <div class="card" style="width: 18rem;">
+            <img src="/static/{{user["photo_url"]}}" class="card-img-top" alt="Image of {{user.get_fullname()}}">
+            <div class="card-body">
+                <h5 class="card-title">{{user.get_fullname()}}</h5>
+                <p class="card-text">What we know about you</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Firstname: {{user["firstname"].capitalize()}}</li>
+                <li class="list-group-item">Lastname: {{user["lastname"].capitalize()}}</li>
+                <li class="list-group-item">Email: {{user["email"]}}</li>
+            </ul>
+            <div class="card-body d-flex flex-row">
+                <a href="#" class="btn btn-outline-success mx-2">Edit Profile</a>
+                <a href="/user/delete" class="btn btn-outline-danger mx-2">Delete your account</a>
+            </div>
+            </div>
+
+
+    </section>
+ 
+
+  </section>
+  
+  <section>
+   
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div
+        id="dashboard-live-toast"
+        class="toast"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="toast-header">
+          <strong class="me-auto">Foodify</strong>
+          <small>now</small>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="toast-body">You should get a cart</div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock custom_root %}

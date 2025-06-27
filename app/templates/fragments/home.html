@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block custom_root %}
 <nav class="navbar bg-body-tertiary fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Foodify</a>
+    <a class="navbar-brand" href="/home">Foodify</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -58,9 +58,15 @@
         </ul>
 
         <section class="my-3">
+          {% if session["username"] %}
+            <a class="btn btn-outline-primary" href="/dashboard">Dashboard</a>
+            <a class="btn btn-outline-danger" href="/logout">Log out</a>
+          {% else %}
           <a class="btn btn-outline-primary" href="/login">Log in</a>
           <a class="btn btn-primary" href="/signup">Sign up</a>
+          {% endif %}
         </section>
+
       </div>
     </div>
   </div>

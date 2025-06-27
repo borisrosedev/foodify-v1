@@ -1,8 +1,8 @@
-from sqlalchemy import Integer, String, Enum
+import enum
+from sqlalchemy import String, Enum
 from sqlalchemy.orm import Mapped, mapped_column
 from werkzeug.security import generate_password_hash, check_password_hash
 from ...db import db
-import enum
 
 class UserRole(enum.Enum):
     user="user"
@@ -11,8 +11,7 @@ class UserRole(enum.Enum):
 
 
 class User(db.Model):
-    __tablename__="users"
-    
+    __tablename__="users" 
     id: Mapped[int] = mapped_column(primary_key=True)
     email: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
     password_hash: Mapped[str]= mapped_column(String(200), nullable=False)
@@ -26,6 +25,7 @@ class User(db.Model):
 
     @property 
     def password(self):
+        """makes impossible to read the password property"""
         raise Exception('password is write-only')
 
     @password.setter
@@ -33,5 +33,6 @@ class User(db.Model):
         self.password_hash = generate_password_hash(password=plain_password)
 
     def check_password(self, raw_password):
+        """check the password"""
         return check_password_hash(self.password_hash, raw_password)
 

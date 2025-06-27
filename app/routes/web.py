@@ -28,13 +28,17 @@ class AppProduct:
 products_list = [
     AppProduct(1,"https://images.pexels.com/photos/905847/pexels-photo-905847.jpeg","pizza","Qui adipisicing exercitation magna aliquip labore aute velit et. Esse tempor excepteur elit laborum deserunt exercitation ex reprehenderit est ad sit eiusmod. Eu tempor anim esse adipisicing aute aliqua laboris sit fugiat. Qui Lorem Lorem ea quis do incididunt adipisicing. Aliqua culpa duis excepteur eu sint laborum quis labore aliquip sint. Ex consectetur officia sint fugiat tempor consequat duis proident minim do magna ad",1, 1, 100, 15),
     AppProduct(2,"https://images.pexels.com/photos/1132558/pexels-photo-1132558.jpeg","strawberries","Ea enim anim cillum quis laboris ullamco esse. Sunt ut fugiat nulla duis non veniam quis labore ut velit nulla aliqua. Irure cillum reprehenderit anim incididunt cupidatat elit. Laboris non ut pariatur elit culpa occaecat fugiat magna duis labore laborum",1, 2, 50, 13),
-    AppProduct(3,"https://images.pexels.com/photos/2912108/pexels-photo-2912108.jpeg","wine","Proident ullamco Lorem sunt et ea id ex nisi. Amet nisi cillum cupidatat nisi cupidatat qui irure elit ipsum commodo eu. Anim veniam enim minim pariatur. Anim do eu aliquip elit. Aute ad ea excepteur nisi et magna est consequat", 1, 3, 10, 20)
+    AppProduct(3,"https://images.pexels.com/photos/2912108/pexels-photo-2912108.jpeg","wine","Proident ullamco Lorem sunt et ea id ex nisi. Amet nisi cillum cupidatat nisi cupidatat qui irure elit ipsum commodo eu. Anim veniam enim minim pariatur. Anim do eu aliquip elit. Aute ad ea excepteur nisi et magna est consequat", 1, 3, 10, 20),
+    AppProduct(4, "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg", "pancakes", "Pariatur ut cupidatat proident voluptate est ea. Elit sint dolor adipisicing dolore ad. Occaecat ea duis cupidatat culpa velit Lorem duis elit do sunt enim sit. Nulla enim laboris aute cupidatat quis aliquip. Aliqua mollit aute exercitation occaecat tempor sit officia commodo veniam incididunt laboris. Esse fugiat quis sit nulla anim ex pariatur veniam quis ullamco cillum elit. Dolor culpa ipsum magna elit aliquip tempor Lorem laborum.", 1, 3, 10, 10),
+    AppProduct(5, "https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg", "chocolate cake", "Tempor id adipisicing voluptate adipisicing elit consequat aliquip dolor pariatur nulla incididunt. Est sit ullamco tempor incididunt cillum. Minim ex ullamco laborum veniam fugiat qui magna adipisicing aliquip id ipsum cillum pariatur do. Cupidatat ea fugiat amet qui minim qui occaecat in proident Lorem esse mollit. Proident esse dolore incididunt deserunt non consectetur anim laborum ad amet duis. Incididunt fugiat excepteur do id sunt incididunt sunt voluptate aliqua.", 1, 3, 10, 13),
+    AppProduct(6, "https://images.pexels.com/photos/808941/pexels-photo-808941.jpeg", "Macarons", "Labore proident et deserunt minim pariatur. Eu eu cillum fugiat ut quis ullamco sunt enim proident adipisicing culpa non duis Lorem. Excepteur laboris Lorem velit mollit officia nisi non reprehenderit mollit commodo ex. Esse irure sit dolore mollit ea cillum commodo nulla incididunt veniam. Ullamco enim cillum dolor enim officia consectetur do non ad officia amet incididunt cillum. Duis dolor elit excepteur magna cillum reprehenderit et non culpa dolor. Quis fugiat non ex Lorem amet.", 1, 3, 10, 20)
 ]
 
 
 
 
 def allowed_file(filename):
+    """ Allow files """
     return '.' in filename and (filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS)
 
 ## ===========================
@@ -42,6 +46,7 @@ def allowed_file(filename):
 
 @web.route("/", methods=["GET"])
 def index():
+    """ Render the landing page"""
     return render_template("index.html")
 
 
@@ -52,21 +57,25 @@ def home():
 
 @web.route("/login", methods=["GET"])
 def login():
+    if session and "username" in session:
+        return redirect(url_for("web.dashboard"))
     return render_template("fragments/login.html")
 
 
 @web.route("/signup", methods=["GET"])
 def signup():
+    if session and "username" in session:
+        return redirect(url_for("web.dashboard"))
     return render_template("fragments/signup.html")
 
 
 @web.route("/dashboard", methods=["GET"])
 def dashboard():
     if session and "username" in session:
-            email = session["username"]
-            user = db.session.execute(db.select(User).filter_by(email=email)).scalar()
-            if user:
-                return render_template('fragments/dashboard.html', user=user)
+        email = session["username"]
+        user = db.session.execute(db.select(User).filter_by(email=email)).scalar()
+        if user:
+            return render_template('fragments/dashboard.html', user=user)
     session["error"] = {'message': 'You are not logged in'}    
     return redirect(url_for('web.error'))
 
@@ -96,19 +105,8 @@ def menu():
 
 @web.route("/cart/add/<int:id>", methods=["GET"])
 def card_add(id):
-
-    if session and 'username' in session:
-        email = session["username"]
-        user = db.session.execute(db.select(User).filter_by(email=email)).scalar()
-        for item in products_list:
-            if item.id == id:
-                print(item)
-                return jsonify(message=f"{item.name} : added to card ")
-        session["error"]= { 'message': f'Element with id: {id} not found'}
-        return redirect(url_for('web.menu'))  
-    else:
-        session["error"]= { 'message': 'You are not logged in'}
-        return redirect(url_for('web.login'))    
+    return
+       
 
 
 
